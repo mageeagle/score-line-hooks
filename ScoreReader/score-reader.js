@@ -81,7 +81,7 @@ function processParam (sec) {
             outArr.push(Number(paramArr[count - 1]))
             outArr.push(0)
             if (curveMode) outArr.push(0)
-            Max.outlet(outArr)
+            Max.outlet([obj.name, 'curve', 0]).then(() => Max.outlet(outArr))
         } else {
         // Offset
         const initParam = Number(paramArr[0])

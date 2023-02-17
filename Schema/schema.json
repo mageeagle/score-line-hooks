@@ -1,0 +1,58 @@
+{
+  "title": "Score",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "score": {
+      "type": "array",
+      "format": "tabs-top",
+      "title": "Sections",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+          "title": "Parameters",
+          "format": "categories",
+          "properties": {
+            "section": {
+              "type": "string"
+            },
+            "startOffset": {
+              "type": "number"
+            },
+            "duration": {
+              "type": "number"
+            },
+            "param": {
+              "type": "array",
+              "format": "table",
+              "title": "Parameters",
+              "uniqueItems": true,
+              "items": {
+                "type": "object",
+                "title": "Parameters",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                 "lineMode": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "string"
+                  },
+                  "time": {
+                    "type": "string"
+                  },
+                  "crv": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+}
