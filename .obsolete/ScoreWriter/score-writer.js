@@ -5,6 +5,7 @@ let currentSection = ''
 let name = 'score'
 let param = []
 let score = []
+let lineMode = 'line'
 
 // This will be printed directly to the Max console
 Max.post(`Loaded the ${path.basename(__filename)} script`);
@@ -12,9 +13,18 @@ Max.post(`Loaded the ${path.basename(__filename)} script`);
 // Default Parameters
 
 Max.addHandler("name", (string) => {
-	Max.post("Name Received");
     name = string
     Max.post("Score Name: " + name)
+
+});
+
+Max.addHandler("lineMode", (string) => {
+    if (string !== 'line' || string !== 'curve') {
+        Max.post("Line Mode must be either line or curve")
+        return
+    }
+    lineMode = string
+	Max.post("Line Mode: " + lineMode);
 
 });
 
@@ -63,7 +73,8 @@ Max.addHandler("write", (string) => {
 	Max.post("Write Score to Dict");
     const out = {
         "name": name,
-        "score": score
+        "score": score,
+        "lineMode": lineMode
     }
     Max.setDict(string, out)
     Max.post("Output Dict: " + string)

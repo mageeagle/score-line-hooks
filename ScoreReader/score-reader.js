@@ -15,12 +15,13 @@ Max.addHandler("score", (string) => {
     if (!string) return
     currentScore = string
     Max.getDict(currentScore).then((v) => {
-        Max.post("Score Name: " + currentScore)
+        Max.post("Dict Reference: " + currentScore)
+        Max.post("Score Name : " + v.name)
         const out = ['scoreSectionSelector']
         v.score.forEach((sec) => {
 		    out.push(sec.section)
     })
-    Max.outlet(out)
+    Max.outlet(out).then(() => Max.outlet(["scoreName", v.name]))
 }).catch(() => {
     console.error(`Score not found`)
     Max.post("Score Not Found")
@@ -70,6 +71,8 @@ function processParam (sec) {
         const paramArr = obj.param.split(' ')
         const timeArr = obj.time.split(' ')
         const count = paramArr.length
+        const curveMode = (obj.lineMode === 'curve')
+        const crvArr = (curveMode && obj.crv) ? obj.crv.split(' ') : null
 
         // If last value arrive time < start time
         // Sum of Time Running
@@ -77,6 +80,7 @@ function processParam (sec) {
         if ((sumTime + initStartTime) < startTime) {
             outArr.push(Number(paramArr[count - 1]))
             outArr.push(0)
+            if (curveMode) outArr.push(0)
             Max.outlet(outArr)
         } else {
         // Offset
@@ -84,8 +88,10 @@ function processParam (sec) {
         if ((thisStartTime <= initStartTime)) {
             outArr.push(initParam)
             outArr.push(0)
+            if (curveMode) outArr.push(0)
             outArr.push(initParam)
             outArr.push(initStartTime - thisStartTime)
+            if (curveMode) outArr.push(0)
             thisStartTime = 0
         }
         if ((thisStartTime > initStartTime)) {
@@ -98,11 +104,13 @@ function processParam (sec) {
             if (thisStartTime === 0) {
                 outArr.push(Number(paramArr[i]))
                 outArr.push(t)
+                if (curveMode) outArr.push(Number(crvArr[i]))
             }
             // First Value
             if ((thisStartTime === t) && (thisStartTime !== 0)) {
                 outArr.push(Number(paramArr[i]))
                 outArr.push(0)
+                if (curveMode) outArr.push(0)
                 thisStartTime = 0
             }
             // In the middle of two values
@@ -114,8 +122,10 @@ function processParam (sec) {
                 const paramStart = lastParam + ((thisParam - lastParam) * position)
                 outArr.push(paramStart)
                 outArr.push(0)
+                if (curveMode) outArr.push(0)
                 outArr.push(thisParam)
                 outArr.push(timeLeft)
+                if (curveMode) outArr.push(Number(crvArr[i]))
                 thisStartTime = 0
             }
             // Skipping before start time
@@ -123,7 +133,7 @@ function processParam (sec) {
                 thisStartTime -= t
             }
         }
-        Max.outlet(outArr)
+        Max.outlet([obj.name, 'curve', curveMode]).then(() => Max.outlet(outArr))
         }
     }) 
 }

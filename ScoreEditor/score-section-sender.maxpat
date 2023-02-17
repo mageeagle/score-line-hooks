@@ -40,6 +40,18 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-10",
+					"linecount" : 5,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 225.0, 313.162120265960766, 150.0, 75.0 ],
+					"text" : "Sends list of pattr names to score editor for line/curve function editing\n\nHou Lam Wu (Eagle) 2023"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-9",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -231,6 +243,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-5", 1 ],
+					"midpoints" : [ 212.5, 79.576276672128699, 281.5, 79.576276672128699 ],
 					"order" : 0,
 					"source" : [ "obj-2", 0 ]
 				}
