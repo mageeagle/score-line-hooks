@@ -1,3 +1,4 @@
+// Score Editor by Hou Lam Wu (Eagle) 2023
 const path = require('path');
 const Max = require('max-api');
 
