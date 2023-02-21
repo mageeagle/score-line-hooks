@@ -40,6 +40,41 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-79",
+					"linecount" : 4,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1288.137930750846863, 1436.551625669002533, 261.034475147724152, 62.0 ],
+					"text" : "The reader sends line/curve formatted messages to their respective named receive objects. You may simply use a receive object and a line object and it would just work."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-77",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1257.137930750846863, 1603.448165953159332, 50.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-13",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1288.137930750846863, 1513.344826877117157, 168.0, 22.0 ],
+					"text" : "r test-example-filter-input-gain"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"args" : [ "hi-example-filter" ],
 					"bgmode" : 0,
 					"border" : 0,
@@ -251,7 +286,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1580.0, 126.0, 179.0, 255.0 ],
+					"patching_rect" : [ 1580.0, 126.0, 182.0, 255.0 ],
 					"text" : "Values and Portion of time of each param is displayed here to see things as a whole. This is in a deinterleaved line format.\n\nLine object takes the Parameter / Duration Pair,\nHence the parameter side is on the 3rd Column, the Duration side is in the 4th Column. This gives a clean view of how parameters change, as well as their durations.\n\nDuration (Portion of Time) is normalized, so that the actual duration can be adjusted when the score is being played back. "
 				}
 
@@ -793,11 +828,30 @@
 				}
 
 			}
+, 			{
+				"box" : 				{
+					"id" : "obj-61",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"patching_rect" : [ 1288.137930750846863, 1558.344826877117157, 41.0, 22.0 ],
+					"text" : "line 0."
+				}
+
+			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-61", 0 ],
+					"source" : [ "obj-13", 0 ]
 				}
 
 			}
@@ -830,6 +884,13 @@
 					"destination" : [ "obj-3", 0 ],
 					"midpoints" : [ 57.5, 98.799464881420135, 30.5, 98.799464881420135 ],
 					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-77", 1 ],
+					"source" : [ "obj-61", 0 ]
 				}
 
 			}
