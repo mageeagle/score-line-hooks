@@ -23,7 +23,7 @@ The "Score" is in dict/json format, and hence it could be exported and saved, an
 
 ---
 ## Score Reader
-The Score can then be played back by the Score Reader, which you could flexible change the duration and the starting point of the score playback, due to the nature of normalized durations saved in the score.
+The Score can then be played back by the Score Reader, which you could flexible change the duration and the starting point of the score playback, due to the nature of normalized durations saved in the score. The reader sends line/curve formatted messages to their respective named receive objects. You may simply use a receive object and a line object and it would just work.
 
 Refer to the Example on how to use.
 
