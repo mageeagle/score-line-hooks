@@ -59,7 +59,7 @@ const loadSection = (x) => {
         const out3 = ['currentSectionParam']
         Max.post("Current Section Name: " + v.score[currentSection].section)
         v.score[currentSection].param.forEach((param) => {
-            out.push(param.name)
+            out.push(param.name.replace(v.score[currentSection].section + "-", ""))
             out2.push(param.param)
             out3.push(param.time)
         })
